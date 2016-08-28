@@ -1,5 +1,5 @@
 (TeX-add-style-hook
- "git"
+ "shell"
  (lambda ()
    (add-to-list 'LaTeX-verbatim-environments-local "semiverbatim")
    (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperref")
