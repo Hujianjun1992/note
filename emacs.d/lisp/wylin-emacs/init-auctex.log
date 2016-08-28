@@ -1,0 +1,43 @@
+This is TeX, Version 3.14159265 (TeX Live 2015) (INITEX)  7 APR 2016 12:47
+**init-auctex.el
+(./init-auctex.el
+! Undefined control sequence.
+l.71  ;;    "d:\emacs
+                     -24.5\bin\emacsclient.exe" --no-wait +%l "%f"
+? 
+! Interruption.
+<to be read again> 
+                   -
+l.71  ;;    "d:\emacs-
+                      24.5\bin\emacsclient.exe" --no-wait +%l "%f"
+? 
+! Undefined control sequence.
+l.71  ;;    "d:\emacs-24.5\bin
+                              \emacsclient.exe" --no-wait +%l "%f"
+? 
+! Undefined control sequence.
+l.71  ;;    "d:\emacs-24.5\bin\emacsclient
+                                          .exe" --no-wait +%l "%f"
+? 
+! Interruption.
+<to be read again> 
+                   .
+l.71  ;;    "d:\emacs-24.5\bin\emacsclient.
+                                           exe" --no-wait +%l "%f"
+? 
+! Undefined control sequence.
+l.76         '(("PDF Viewer" ("\"
+                                 SumatraPDF.exe\" -reuse-instance"
+? 
+! Undefined control sequence.
+l.76         '(("PDF Viewer" ("\"SumatraPDF.exe\"
+                                                  -reuse-instance"
+? 
+)
+*
+! Emergency stop.
+<*> init-auctex.el
+                  
+End of file on the terminal!
+
+No pages of output.
