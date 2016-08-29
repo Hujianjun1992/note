@@ -1,0 +1,115 @@
+\documentclass{beamer}
+
+\usetheme{Warsaw}
+\usecolortheme{lily}
+
+\usepackage{CJKutf8}
+
+\newcommand{\quotes}[1]{"#1"}
+
+\begin{document}
+
+\begin{CJK}{UTF8}{gkai}
+
+  \title{Emacs}
+  \subtitle{笔记}
+  \author{H-X-B \LaTeX{} }
+  \institute[HIT]
+  {
+    哈尔滨工业大学~航天学院\\
+    \medskip
+    \textit{292554331@qq.com}\\
+  }
+  \date{\today}
+
+  \frame{\titlepage}
+
+  \begin{frame}\frametitle{}
+    M-r 移动到页面中间行首位置\\
+    M-g M-g [n] or M-g g [n] 移动到指定行 n\\
+    M-n or C-u n 重复下个命令 n 次\\
+    M-l 后一个单词变成小写\\
+  \end{frame}
+
+  \begin{frame}\frametitle{删除}
+    M-Backspace\\
+    M-d\\
+    C-x Backspace\\
+    M-k\\
+    C-k\\
+    C-d \\
+
+  \end{frame}
+
+  \begin{frame}\frametitle{}
+    C-o 插入空行\\
+    C-x C-o 删除空行\\
+    C-x z 重复前个命令\\
+  \end{frame}
+
+  \begin{frame}\frametitle{}
+    C-x C-u 将所选区域字母改成大写字母\\
+    C-x h 全选\\
+    M-h 选取一段\\
+    C-x C-p 选取整页\\
+  \end{frame}
+
+  \begin{frame}\frametitle{}
+    M-\ 删除光标处的所有空格和 Tab 字符\\
+    C-x C-o 删除光标周围的空白行,保留当前行\\
+   % M-^ 将两行合为一行,删除之间的空白和缩进\\
+  \end{frame}
+
+  \begin{frame}\frametitle{Minibuffer}
+    C-M-v  or M-PageUp\\
+    C-M-S-v or M-PageDown\\
+    M-p\\
+    M-n\\
+    M-r\\
+    M-s\\
+  \end{frame}
+
+  \begin{frame}\frametitle{查询}
+    C-s\\
+    C-r\\
+    C-s C-s\\
+    C-r C-r\\
+    C-s 后 M-n or M-p \\
+    C-j 代替回车\\
+    M-c 大小写敏感 只对本次查找\\
+    C-w 可以将光标处单词复制到查找区域中进行快速输入\\
+    C-y 把光标所在处直到行尾的内容都复制到查找区域\\
+    M-s word \\
+  \end{frame}
+
+  \begin{frame}\frametitle{替换}
+    M-x replace-string RET oldstring RET RET newstring RET\\
+    M-\% 这个比较好\\
+  \end{frame}
+
+  \begin{frame}\frametitle{Buffer}
+    C-x C-b 显示所有缓存\\
+    C-x k buffer 关闭指定缓存\\
+    kill-some-buffer or clean-buffer-list\\
+    C-x C-q 切换当前缓冲的只读属性\\
+  \end{frame}
+
+  \begin{frame}\frametitle{窗口}
+    C-x 2 or C-x 3 or M-5 C-x 2 \\
+    C-x o 窗口切换\\
+    C-x 4 f 在另一个窗口打开文件\\
+    C-x 4 0 \\
+  \end{frame}
+
+  \begin{frame}\frametitle{窗口大小}
+    % C-x ^
+    窗口变得高点\\
+    C-x \{ 窗口变窄\\
+    C-x \} 窗口变宽\\
+%    C-x - 窗口比缓冲大就缩小点\\
+    C-x + 将所有窗口变得一样高\\
+  \end{frame}
+
+\end{CJK}
+
+\end{document}
