@@ -23,7 +23,222 @@
 
   \frame{\titlepage}
 
+  \begin{frame}\frametitle{模板}
+    cmake\_minimum\_required(VERSION 2.8.3 FATAL\_ERROR)\\
+    project(Cmake)\\
+    set(SRC\_LIST main.cpp)\\
+    message(STATUS "" \${PROJECT\_BINARY\_DIR})\\
+    message(STATUS "" \${PROJECT\_SOURCE\_DIR})\\
+    add\_executable(cmake1 \${SRC\_LIST})\\
+    make VERBOSE=1 看到 make 构建的详细过程
+  \end{frame}
 
+  \begin{frame}\frametitle{}
+    SET(VAR [VALUE] [CACHE TYPE DOCSTRING [FORCE]])\\
+    MESSAGE([SEND\_ERROR | STATUS | FATAL\_ERROR] "message to
+    display"...)\\
+    SEND\_ERROR 产生错误,生成过程被跳过。\\
+    SATUS 输出前缀为—的信息。\\
+    FATAL\_ERROR,立即终止所有 cmake 过程.
+  \end{frame}
+
+  \begin{frame}\frametitle{}
+    ADD\_SUBDIRECTORY(source\_dir [binary\_dir] [EXCLUDE\_FROM\_ALL])\\
+    这个指令用于向当前工程添加存放源文件的子目录,并可以指定中间二进制和目标二进制存
+    放的位置。EXCLUDE\_FROM\_ALL 参数的含义是将这个目录从编译过程中排
+    除,\\
+    ADD\_SUBDIRECTORY(src bin)\\
+    上面的例子定义了将 src 子目录加入工程,并指定编译输出(包含编译中间结果)路径为
+    bin 目录。如果不进行 bin 目录的指定,那么编译结果(包括中间结果)都将存放在
+    build/src 目录(这个目录跟原有的 src 目录对应),指定 bin 目录后,相当于在编译时
+    将 src 重命名为 bin,所有的中间结果和目标二进制都将存放在 bin 目录。
+  \end{frame}
+
+  \begin{frame}\frametitle{}
+    SET(EXECUTABLE\_OUTPUT\_PATH \${PROJECT\_BINARY\_DIR}/bin)\\
+    SET(LIBRARY\_OUTPUT\_PATH \${PROJECT\_BINARY\_DIR}/lib)\\
+    在哪里 ADD\_EXECUTABLE 或 ADD\_LIBRARY,如果需要改变目标存放路径,就在哪里加入上述的定义
+  \end{frame}
+
+  \begin{frame}\frametitle{目标文件}
+%    INSTALL(TARGETS targets...\\
+%    [[ARCHIVE|LIBRARY|RUNTIME]\\
+%    [DESTINATION <dir>]\\
+%    [PERMISSIONS permissions...]\\
+%    [CONFIGURATIONS\\
+%    [Debug|Release|...]]\\
+%    [COMPONENT <component>]\\
+%    [OPTIONAL]\\
+%    ] [...])\\
+    目标类型也就相对应的有三种,ARCHIVE 特指静态库,LIBRARY 特指动态库,RUNTIME
+    特指可执行目标二进制。\\
+    DESTINATION 定义了安装的路径,如果路径以/开头,那么指的是绝对路径,这时候
+    CMAKE\_INSTALL\_PREFIX 其实就无效了。如果你希望使用 CMAKE\_INSTALL\_PREFIX 来
+    定义安装路径,就要写成相对路径,即不要以/开头,那么安装后的路径就是
+    \${CMAKE\_INSTALL\_PREFIX}/<DESTINATION 定义的路径>
+  \end{frame}
+
+  \begin{frame}\frametitle{目标文件}
+    INSTALL(TARGETS myrun mylib mystaticlib\\
+    RUNTIME DESTINATION bin\\
+    LIBRARY DESTINATION lib\\
+    ARCHIVE DESTINATION libstatic\\
+    )\\
+    可执行二进制myrun安装到\${CMAKE\_INSTALL\_PREFIX}/bin 目录\\
+    动态库libmylib安装到\${CMAKE\_INSTALL\_PREFIX}/lib 目录\\
+    静态库libmystaticlib安装到\${CMAKE\_INSTALL\_PREFIX}/libstatic 目录\\
+  \end{frame}
+
+  \begin{frame}\frametitle{普通文件}
+    % INSTALL(FILES files... DESTINATION <dir>
+    % [PERMISSIONS permissions...]
+    % [CONFIGURATIONS [Debug|Release|...]]
+    % [COMPONENT <component>]
+    % [RENAME <name>] [OPTIONAL])
+  \end{frame}
+
+  \begin{frame}\frametitle{目录}
+    % INSTALL(DIRECTORY dirs... DESTINATION <dir>
+    % [FILE_PERMISSIONS permissions...]
+    % [DIRECTORY_PERMISSIONS permissions...]
+    % [USE_SOURCE_PERMISSIONS]
+    % [CONFIGURATIONS [Debug|Release|...]]
+    % [COMPONENT <component>]
+    % [[PATTERN <pattern> | REGEX <regex>]
+    % [EXCLUDE] [PERMISSIONS permissions...]] [...])
+  \end{frame}
+
+  \begin{frame}\frametitle{Example}
+    INSTALL(DIRECTORY icons scripts/ DESTINATION share/myprojPATTERN \quotes{CVS} EXCLUDE\\
+    PATTERN \quotes{scripts/*}\\
+    PERMISSIONS OWNER\_EXECUTE OWNER\_WRITE OWNER\_READ\\
+    GROUP\_EXECUTE GROUP\_READ)\\
+    将 icons 目录安装到 <prefix>/share/myproj,将scripts/中的内容安装到
+    <prefix>/share/myproj 不包含目录名为 CVS 的目录,对于 scripts/* 文件指定权限为 OWNER\_EXECUTE
+    OWNER\_WRITE OWNER\_READ GROUP\_EXECUTE GROUP\_READ.
+  \end{frame}
+
+  \begin{frame}\frametitle{}
+    安装 COPYRIGHT/README: INSTALL(FILES COPYRIGHT README DESTINATION
+    share/doc/cmake/t2)\\
+    安装 runhello.sh(脚本):INSTALL(PROGRAMS runhello.sh DESTINATION
+    bin)\\
+    安装 doc 中的 hello.txt: INSTALL(DIRECTORY doc/ DESTINATION
+    share/doc/cmake/t2)\\
+  \end{frame}
+
+  \begin{frame}\frametitle{命令}
+    cmake -DCMAKE\_INSTALL\_PREFIX=/tmp/t2/usr .. \\
+    make \\
+    make install\\
+  \end{frame}
+
+  \begin{frame}\frametitle{静态库与动态库}
+    SET(LIBHELLO\_SRC hello.c)\\
+    ADD\_LIBRARY(hello SHARED \${LIBHELLO\_SRC})\\
+    SET(LIBRARY\_OUTPUT\_PATH <路径>)来指定一个新的位置\\
+  \end{frame}
+
+   \begin{frame}\frametitle{ADD\_LIBRARY}
+    % ADD_LIBRARY(libname
+    % [SHARED|STATIC|MODULE]
+    % [EXCLUDE\_FROM\_ALL]
+    % source1 source2 ... sourceN)
+     SHARED,动态库\\
+     STATIC,静态库\\
+   \end{frame}
+
+  \begin{frame}\frametitle{添加静态库}
+    ADD\_LIBRARY(hello\_static STATIC \${LIBHELLO\_SRC}) 就可以构建一个
+    libhello\_static.a 的静态库了。\\
+    SET\_TARGET\_PROPERTIES(hello\_static PROPERTIES OUTPUT\_NAME
+    \quotes{hello})将libhello\_static.a改名为libhello.a\\
+  \end{frame}
+
+  \begin{frame}\frametitle{安装}
+
+  \end{frame}
+
+  \begin{frame}\frametitle{命令}
+    SET\_TARGET\_PROPERTIES,其基本语法是:
+    SET\_TARGET\_PROPERTIES(target1 target2 ...\\
+    PROPERTIES prop1 value1\\
+    prop2 value2 ...)\\
+    GET\_TARGET\_PROPERTY(VAR target property)\\
+    Example:GET\_TARGET\_PROPERTY(OUTPUT\_VALUE hello\_static
+    OUTPUT\_NAME)\\
+    MESSAGE(STATUS \quotes{This is the hello\_static OUTPUT\_NAME:}\${OUTPUT\_VALUE})
+  \end{frame}
+
+  \begin{frame}\frametitle{命令}
+    SET\_TARGET\_PROPERTIES(hello PROPERTIES CLEAN\_DIRECT\_OUTPUT 1)\\
+    SET\_TARGET\_PROPERTIES(hello\_static PROPERTIES
+    CLEAN\_DIRECT\_OUTPUT 1)\\
+    没有用  有可能版本的问题
+  \end{frame}
+
+  \begin{frame}\frametitle{动态库版本号}
+    SET\_TARGET\_PROPERTIES(hello PROPERTIES VERSION 1.2 SOVERSION
+1)\\
+    VERSION 指代动态库版本,SOVERSION 指代 API 版本。\\
+  \end{frame}
+
+  \begin{frame}\frametitle{安装库及头文件}
+    INSTALL(TARGETS hello hello\_static\\
+    LIBRARY DESTINATION lib\\
+    ARCHIVE DESTINATION lib)\\
+    INSTALL(FILES hello.h DESTINATION include/hello)\\
+  \end{frame}
+
+  \begin{frame}\frametitle{使用共享库和头文件}
+    方法一：include<hello/hello.h>\\
+    方法二：INCLUDE\_DIRECTORIES(/usr/include/hello)\\
+    方法三: export CMAKE\_INCLUDE\_PATH=/usr/include/hello\\
+    FIND\_PATH(myHeader hello.h)\\
+    IF(myHeader)\\
+    INCLUDE\_DIRECTORIES(\${myHeader})\\
+    ENDIF(myHeader)\\
+    TARGET\_LINK\_LIBRARIES(main hello)
+  \end{frame}
+
+  \begin{frame}\frametitle{命令}
+    LINK\_DIRECTORIES(directory1 directory2 ...)\\
+    添加非标准的共享库搜索路径,比如,在工程内部同时存在共享库和可执行二
+    进制,在编译时就需要指定一下这些共享库的路径。\\
+    TARGET\_LINK\_LIBRARIES(target library1\\
+    <debug | optimized> library2\\
+    ...)\\
+  \end{frame}
+
+  \begin{frame}\frametitle{指令}
+    使用\$ENV{NAME}指令就可以调用系统的环境变量\\
+    测试:add\_test(mytest \${PROJECT\_BINARY\_DIR}/src/cmake)\\
+    enable\_testing()\\
+    make test\\
+  \end{frame}
+
+  \begin{frame}\frametitle{}
+    if(WIN32)\\
+    message(STATUS \quotes{This is windows})\\
+    elseif(LINUX)\\
+    message(STATUS \quotes{This is Linux})\\
+    elseif(UNIX)\\
+    message(STATUS \quotes{This is UNIX})\\
+    endif(WIN32)\\
+  \end{frame}
+
+  \begin{frame}\frametitle{}
+    FOREACH(VAR RANGE 10)\\
+    MESSAGE(\${VAR})\\
+    输出:0 1 2 3 4 5 6 7 8 9 10
+  \end{frame}
+
+  \begin{frame}\frametitle{}
+    FOREACH(A RANGE 5 15 3)\\
+    MESSAGE(\${A})\\
+    ENDFOREACH(A)\\
+    输出:5 8 11 14
+  \end{frame}
 
 \end{CJK}
 

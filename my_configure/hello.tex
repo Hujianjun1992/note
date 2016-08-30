@@ -62,7 +62,7 @@
 \usepackage{pgfpages}
 \usepackage{latexsym,pifont,units,amsmath,amsfonts,amssymb,marvosym}
 
-
+\newcommand{\quotes}[1]{"#1"}
 
 \usepackage{graphicx} % Allows including images
 \graphicspath{{./figs/}{../figs/}{./}{../}}
@@ -185,7 +185,10 @@
    %\end{theorem}
  \end{frame}
 
-
+ \begin{frame}\frametitle{挂载}
+   sudo fdisk -l\\
+   sudo mount -t nfts /dev/sda\quotes{n} /mnt/
+ \end{frame}
 
 \end{CJK}
 
