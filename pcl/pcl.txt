@@ -1,0 +1,2 @@
+sudo apt-get install g++ cmake cmake-qt-gui doxygen mpi-default-dev openmpi-bin openmpi-common libflann1.8 libflann-dev libeigen3-dev libboost-all-dev libvtk5.8-qt4 libvtk5.8 libvtk5-dev libqhull6 libqhull-dev libqhull-doc libusb-dev libgtest-dev git-core freeglut3-dev pkg-config build-essential libxmu-dev libxi-dev libusb-1.0-0-dev graphviz mono-complete qt-sdk openjdk-7-jdk openjdk-7-jre phonon-backend-gstreamer phonon-backend-vlc libvtk-java python-vtk
+
