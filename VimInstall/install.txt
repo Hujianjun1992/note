@@ -1,0 +1,5 @@
+
+    this->protect_chang_num.lock();
+    this->chang_num--;
+    this->protect_chang_num.unlock();
+
